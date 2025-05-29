@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Ajay Portfolio",
     locale: "en_US",
-    url: "https://ajayportfolio.vercel.app/",
+    url: "https://portfolio-ajay-psi.vercel.app/",
     images: [
       {
         url: "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
