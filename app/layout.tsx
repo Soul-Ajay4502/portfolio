@@ -45,6 +45,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Google Analytics */}
+        <meta name="google-site-verification" content="3moN3lXZUR5pkwm4iHcCn26-PcVdlL02nFrsTAGgHbU" />
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
