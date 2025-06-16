@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://portfolio-ajay-psi.vercel.app/
+
+# Sitemaps
+Sitemap: https://portfolio-ajay-psi.vercel.app/sitemap.xml
