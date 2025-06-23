@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
         width: 1200,
         height: 630,
-        alt: "Ajay Portfolio",
+        alt: "Ajay Raj's Portfolio Homepage - Full Stack Developer in React.js, Next.js, Node.js",
       },
     ],
   },
@@ -60,6 +60,25 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', '${GA_TRACKING_ID}');
             `,
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Ajayraj A R",
+              "url": "https://portfolio-ajay-psi.vercel.app/",
+              "jobTitle": "Full Stack Developer",
+              "worksFor": {
+                "@type": "Beurokrat",
+                "name": "Ajayraj Portfolio"
+              },
+              "image": "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
+              "sameAs": []
+            })
           }}
         />
       </head>
