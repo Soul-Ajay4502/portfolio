@@ -62,7 +62,7 @@ export default function SkillTabs() {
             {/* Skills Categories */}
             <Tabs defaultValue="frontend" className="mb-16" onValueChange={setActiveTab}>
                 <div className="flex justify-center mb-8">
-                    <TabsList className="grid grid-cols-2 md:grid-cols-3 gap-2 ">
+                    <TabsList className="grid grid-cols-3 gap-2 ">
                         <TabsTrigger value="frontend" className="data-[state=active]:border">Frontend</TabsTrigger>
                         <TabsTrigger value="backend" className="data-[state=active]:border">Backend</TabsTrigger>
                         <TabsTrigger value="tools" className="data-[state=active]:border">Tools & Others</TabsTrigger>
