@@ -15,8 +15,7 @@ export const metadata: Metadata = {
   title: "AJAYRAJ A R - Full Stack Developer",
   description:
     "Portfolio of AJAYRAJ A R, a passionate Full Stack Developer with 2+ years of experience in React, Next.js, and modern web technologies.",
-  keywords: "Full Stack Developer, React, Next.js, TypeScript, Node.js, Portfolio,RoadE Labs,Beurokrat",
-  authors: [{ name: "AJAYRAJ A R" }],
+  keywords: "Full Stack Developer, React.js, Next.js, TypeScript, Node.js, Ajayraj Portfolio, RoadE Labs, Beurokrat", authors: [{ name: "AJAYRAJ A R" }],
   openGraph: {
     title: "AJAYRAJ A R - Full Stack Developer",
     description: "Portfolio of AJAYRAJ A R, a passionate Full Stack Developer with 2+ years of experience.",
@@ -46,6 +45,7 @@ export default function RootLayout({
       <head>
         {/* Google Analytics */}
         <meta name="google-site-verification" content="3moN3lXZUR5pkwm4iHcCn26-PcVdlL02nFrsTAGgHbU" />
+        <meta name="msvalidate.01" content="ADA4E1CA403C1AD914B96224CC2B501B" />
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
@@ -73,8 +73,8 @@ export default function RootLayout({
               "url": "https://portfolio-ajay-psi.vercel.app/",
               "jobTitle": "Full Stack Developer",
               "worksFor": {
-                "@type": "Beurokrat",
-                "name": "Ajayraj Portfolio"
+                "@type": "Organization",
+                "name": "Beurokrat"
               },
               "image": "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
               "sameAs": []
