@@ -1,16 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
 import { useForm } from '@formspree/react'
 import Toast from "./toas-by-me"
-import { useEffect } from "react"
-
 
 export default function Contact() {
-  const [formState, handleSubmit] = useForm("mpwdvowg");
+  const [formState, handleSubmit] = useForm("mpwdvowg")
 
   return (
     <section id="contact" className="py-20 bg-gray-800">
@@ -39,7 +36,6 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-bold text-white mb-8">Contact Information</h3>
-
             <div className="space-y-6">
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
@@ -50,7 +46,6 @@ export default function Contact() {
                   <p className="text-white">rajay5767@gmail.com</p>
                 </div>
               </div>
-
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
                   <Phone size={20} className="text-white" />
@@ -60,14 +55,13 @@ export default function Contact() {
                   <p className="text-white">+91 9846027693</p>
                 </div>
               </div>
-
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
                   <MapPin size={20} className="text-white" />
                 </div>
                 <div>
                   <p className="text-gray-400">Location</p>
-                  <p className="text-white">Kochi,Kerala,India</p>
+                  <p className="text-white">Kochi, Kerala, India</p>
                 </div>
               </div>
             </div>
@@ -104,6 +98,15 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot field (hidden from users, visible to bots) */}
+              <input
+                type="text"
+                name="_gotcha"
+                className="hidden"
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Name
@@ -158,6 +161,7 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
+
       {formState.succeeded && (
         <Toast message="Message sent successfully!" type="success" />
       )}
