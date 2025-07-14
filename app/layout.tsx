@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "AJAYRAJ A R - Full Stack Developer",
   description:
     "Portfolio of AJAYRAJ A R, a passionate Full Stack Developer with 2+ years of experience in React, Next.js, and modern web technologies.",
-  keywords: "Full Stack Developer, React.js, Next.js, TypeScript, Node.js, Ajayraj Portfolio, RoadE Labs, Beurokrat", authors: [{ name: "AJAYRAJ A R" }],
+  keywords: "Full Stack Developer, React.js, Next.js, TypeScript, Node.js, Ajayraj Portfolio,Ajayraj,Ajayraj a r, RoadE Labs, Beurokrat", authors: [{ name: "AJAYRAJ A R" }],
   openGraph: {
     title: "AJAYRAJ A R - Full Stack Developer",
     description: "Portfolio of AJAYRAJ A R, a passionate Full Stack Developer with 2+ years of experience.",
@@ -77,7 +77,10 @@ export default function RootLayout({
                 "name": "Beurokrat"
               },
               "image": "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
-              "sameAs": []
+              "sameAs": [
+                "https://github.com/Soul-Ajay4502",
+                "https://www.linkedin.com/in/ajayraj-a-r/",
+              ]
             })
           }}
         />
