@@ -1,31 +1,45 @@
-"use client"
+"use client";
 
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei"
-import { motion } from "framer-motion"
-import { useRef } from "react"
-import type { Mesh } from "three"
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import type { Mesh } from "three";
 
 function AnimatedSphere() {
-  const meshRef = useRef<Mesh>(null)
+  const meshRef = useRef<Mesh>(null);
 
   return (
     <Sphere ref={meshRef} visible args={[1, 100, 200]} scale={2}>
-      <MeshDistortMaterial color="#3b82f6" attach="material" distort={0.5} speed={2} roughness={0} />
+      <MeshDistortMaterial
+        color="#3b82f6"
+        attach="material"
+        distort={0.5}
+        speed={2}
+        roughness={0}
+      />
     </Sphere>
-  )
+  );
 }
 
 export default function Hero() {
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Three.js Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} />
           <AnimatedSphere />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            autoRotate
+            autoRotateSpeed={0.5}
+          />
         </Canvas>
       </div>
 
@@ -55,8 +69,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
         >
-          Passionate developer with 2+ years of experience building modern web applications using React, Next.js, and
-          cutting-edge technologies.
+          Passionate developer with 2+ years of experience building modern web
+          applications using React, Next.js, and cutting-edge technologies.
         </motion.p>
 
         <motion.div
@@ -66,13 +80,21 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <button
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors"
           >
             View My Work
           </button>
           <button
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() =>
+              document
+                .getElementById("contact")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="px-8 py-3 border border-blue-600 hover:bg-blue-600 rounded-lg font-medium transition-colors"
           >
             Get In Touch
@@ -96,5 +118,5 @@ export default function Hero() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }

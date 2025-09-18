@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { skillsData } from "@/lib/data"
-import SkillTabs from "./skill-tabs"
+import { motion } from "framer-motion";
+import { skillsData } from "@/lib/data";
+import SkillTabs from "./skill-tabs";
 
 export default function Skills() {
   return (
@@ -15,7 +15,9 @@ export default function Skills() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Skills & Technologies</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Skills & Technologies
+          </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </motion.div>
 
@@ -55,7 +57,9 @@ export default function Skills() {
                           className="bg-blue-600 h-2 rounded-full"
                         />
                       </div>
-                      <span className="text-blue-400 text-sm font-medium">{skill.level}%</span>
+                      <span className="text-blue-400 text-sm font-medium">
+                        {skill.level}%
+                      </span>
                     </div>
                   </motion.div>
                 ))}
@@ -72,8 +76,7 @@ export default function Skills() {
         >
           <SkillTabs />
         </motion.div>
-
       </div>
     </section>
-  )
+  );
 }

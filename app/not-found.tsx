@@ -1,9 +1,9 @@
-import Custom404 from './custom'
+import Custom404 from "./custom";
 
 export default function NotFound() {
-    return (
-        <>
-            <Custom404 />
-        </>
-    )
+  return (
+    <>
+      <Custom404 />
+    </>
+  );
 }

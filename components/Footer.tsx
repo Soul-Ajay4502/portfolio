@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -13,10 +13,14 @@ export default function Footer() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-gray-400">© {new Date().getFullYear()} AJAYRAJ A R. All rights reserved.</p>
-          <p className="text-gray-500 mt-2">Built with Next.js, Tailwind CSS, and Three.js</p>
+          <p className="text-gray-400">
+            © {new Date().getFullYear()} AJAYRAJ A R. All rights reserved.
+          </p>
+          <p className="text-gray-500 mt-2">
+            Built with Next.js, Tailwind CSS, and Three.js
+          </p>
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }

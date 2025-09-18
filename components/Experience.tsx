@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { experienceData } from "@/lib/data"
+import { motion } from "framer-motion";
+import { experienceData } from "@/lib/data";
 
 export default function Experience() {
   return (
@@ -14,7 +14,9 @@ export default function Experience() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Work Experience</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Work Experience
+          </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </motion.div>
 
@@ -41,16 +43,25 @@ export default function Experience() {
               >
                 <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-blue-600 transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <h3 className="text-xl font-bold text-white">{experience.position}</h3>
-                    <span className="text-blue-400 font-medium">{experience.duration}</span>
+                    <h3 className="text-xl font-bold text-white">
+                      {experience.position}
+                    </h3>
+                    <span className="text-blue-400 font-medium">
+                      {experience.duration}
+                    </span>
                   </div>
 
-                  <h4 className="text-lg text-blue-400 mb-3">{experience.company}</h4>
+                  <h4 className="text-lg text-blue-400 mb-3">
+                    {experience.company}
+                  </h4>
                   <p className="text-gray-300 mb-4">{experience.description}</p>
 
                   <div className="flex flex-wrap gap-2">
                     {experience.technologies.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-gray-700 text-blue-400 text-sm rounded-full">
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-gray-700 text-blue-400 text-sm rounded-full"
+                      >
                         {tech}
                       </span>
                     ))}
@@ -62,5 +73,5 @@ export default function Experience() {
         </div>
       </div>
     </section>
-  )
+  );
 }

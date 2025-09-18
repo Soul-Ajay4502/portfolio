@@ -1,14 +1,19 @@
-import type React from "react"
-import { cn } from "@/lib/utils"
+import type React from "react";
+import { cn } from "@/lib/utils";
 
 interface SkillCardProps {
-  icon: React.ReactNode
-  name: string
-  level?: string
-  className?: string
+  icon: React.ReactNode;
+  name: string;
+  level?: string;
+  className?: string;
 }
 
-export default function SkillCard({ icon, name, level, className }: SkillCardProps) {
+export default function SkillCard({
+  icon,
+  name,
+  level,
+  className,
+}: SkillCardProps) {
   return (
     <div
       className={cn(
@@ -20,5 +25,5 @@ export default function SkillCard({ icon, name, level, className }: SkillCardPro
       <h3 className="font-medium text-lg">{name}</h3>
       {level && <p className="text-sm text-muted-foreground">{level}</p>}
     </div>
-  )
+  );
 }

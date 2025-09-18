@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
-import { useForm } from '@formspree/react'
-import Toast from "./toas-by-me"
+import type React from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+import { useForm } from "@formspree/react";
+import Toast from "./toas-by-me";
 
 export default function Contact() {
-  const [formState, handleSubmit] = useForm("mpwdvowg")
+  const [formState, handleSubmit] = useForm("mpwdvowg");
 
   return (
     <section id="contact" className="py-20 bg-gray-800">
@@ -22,8 +22,8 @@ export default function Contact() {
           <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, interesting projects, or just having a chat about
-            technology.
+            I'm always open to discussing new opportunities, interesting
+            projects, or just having a chat about technology.
           </p>
         </motion.div>
 
@@ -35,7 +35,9 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold text-white mb-8">Contact Information</h3>
+            <h3 className="text-2xl font-bold text-white mb-8">
+              Contact Information
+            </h3>
             <div className="space-y-6">
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
@@ -68,7 +70,9 @@ export default function Contact() {
 
             {/* Social Links */}
             <div className="mt-8">
-              <h4 className="text-lg font-semibold text-white mb-4">Follow Me</h4>
+              <h4 className="text-lg font-semibold text-white mb-4">
+                Follow Me
+              </h4>
               <div className="flex space-x-4">
                 <a
                   href="https://github.com/Soul-Ajay4502"
@@ -108,7 +112,10 @@ export default function Contact() {
               />
 
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Name
                 </label>
                 <input
@@ -122,7 +129,10 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Email
                 </label>
                 <input
@@ -136,7 +146,10 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Message
                 </label>
                 <textarea
@@ -166,5 +179,5 @@ export default function Contact() {
         <Toast message="Message sent successfully!" type="success" />
       )}
     </section>
-  )
+  );
 }

@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Download, Menu, X } from "lucide-react"
-import { Button } from "./ui/button"
-import * as gtag from '@/lib/gtag';
-
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Download, Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+import * as gtag from "@/lib/gtag";
 
 const navigation = [
   { name: "Home", href: "#home" },
@@ -14,11 +13,11 @@ const navigation = [
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
-]
+];
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     gtag.pageview(activeSection); // or manually track hash changes if needed
@@ -26,36 +25,40 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navigation.map((item) => item.href.substring(1))
-      const scrollPosition = window.scrollY + 100
+      const sections = navigation.map((item) => item.href.substring(1));
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
-        const element = document.getElementById(section)
+        const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop
-          const offsetHeight = element.offsetHeight
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
 
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.getElementById(href.substring(1))
+    const element = document.getElementById(href.substring(1));
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
   const handleDownloadResume = () => {
-    const resumePath = "/assets/AJAYRAJ_TWO_YEAR_EXPERIENCED_FULLSTACK_DEVELOPER_RESUME.pdf"; // relative to public/
+    const resumePath =
+      "/assets/AJAYRAJ_TWO_YEAR_EXPERIENCED_FULLSTACK_DEVELOPER_RESUME.pdf"; // relative to public/
     const link = document.createElement("a");
     link.href = resumePath;
     link.download = "AJAYRAJ_FULLSTACK_DEVELOPER_RESUME.pdf"; // File name for downloaded file
@@ -72,7 +75,10 @@ export default function Header() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <motion.div whileHover={{ scale: 1.05 }} className="text-xl font-bold text-white">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-xl font-bold text-white"
+          >
             AJAYRAJ A R
           </motion.div>
 
@@ -82,13 +88,21 @@ export default function Header() {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium transition-colors duration-200 ${activeSection === item.href.substring(1) ? "text-blue-400" : "text-gray-300 hover:text-white"
-                  }`}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  activeSection === item.href.substring(1)
+                    ? "text-blue-400"
+                    : "text-gray-300 hover:text-white"
+                }`}
               >
                 {item.name}
               </button>
             ))}
-            <Button variant="outline" size="sm" onClick={handleDownloadResume} className="flex items-center gap-2 rounded-full">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownloadResume}
+              className="flex items-center gap-2 rounded-full"
+            >
               <Download className="h-4 w-4" />
               Resume
             </Button>
@@ -96,7 +110,10 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-300 hover:text-white">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-300 hover:text-white"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -123,5 +140,5 @@ export default function Header() {
         )}
       </nav>
     </motion.header>
-  )
+  );
 }
