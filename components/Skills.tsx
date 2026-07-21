@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Palette, Server, Database } from "lucide-react";
+import { Palette, Server, Database, Sparkles } from "lucide-react";
 import { skillsData } from "@/lib/data";
 import Marquee from "./magicui/marquee";
 import BlurFade from "./magicui/blur-fade";
@@ -9,6 +8,7 @@ import { MagicCard } from "./magicui/magic-card";
 import SectionHeading from "./section-heading";
 
 const categoryIcons: Record<string, React.ReactNode> = {
+  "AI/Tools": <Sparkles className="h-5 w-5" />,
   Frontend: <Palette className="h-5 w-5" />,
   Backend: <Server className="h-5 w-5" />,
   Database: <Database className="h-5 w-5" />,
@@ -65,12 +65,12 @@ export default function Skills() {
           </div>
         </BlurFade>
 
-        {/* Proficiency cards */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {/* Skill category cards */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {skillsData.map((category, index) => (
             <BlurFade key={category.category} delay={index * 0.1} inView>
               <MagicCard className="h-full p-6">
-                <div className="mb-6 flex items-center gap-3">
+                <div className="mb-5 flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted text-brand">
                     {categoryIcons[category.category] ?? (
                       <span className="text-lg">{category.icon}</span>
@@ -81,31 +81,14 @@ export default function Skills() {
                   </h3>
                 </div>
 
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skill.name}>
-                      <div className="mb-1.5 flex items-center justify-between">
-                        <span className="text-sm text-foreground">
-                          {skill.name}
-                        </span>
-                        <span className="text-xs font-medium text-muted-foreground">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{
-                            duration: 1,
-                            delay: skillIndex * 0.08,
-                            ease: "easeOut",
-                          }}
-                          viewport={{ once: true }}
-                          className="h-full rounded-full bg-gradient-to-r from-brand to-brand-soft"
-                        />
-                      </div>
-                    </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </MagicCard>

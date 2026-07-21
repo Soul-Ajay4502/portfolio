@@ -17,14 +17,17 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-ajay-psi.vercel.app"),
   title: "AJAYRAJ A R — Full Stack & AI Product Developer | Kochi, India",
   description:
-    "AJAYRAJ A R is a full-stack & AI product developer in Kochi, India with 3+ years of experience. Core engineer on Raydian, an AI project-execution engine, and solo builder of Pickbid, a live cricket-auction SaaS. React, Next.js, Node.js.",
+    "Ajayraj A R — full-stack & AI product developer in Kochi, India. Core engineer at Raydian, solo builder of Pickbid. React, Next.js, Node.js, PostgreSQL.",
+  alternates: {
+    canonical: "https://portfolio-ajay-psi.vercel.app/",
+  },
   keywords:
     "Full Stack Developer, AI Product Developer, React Developer, Next.js Developer, Node.js Engineer, TypeScript, Ajayraj, Ajayraj A R, Ajayraj Portfolio, Raydian, Pickbid, Kochi Kerala, SaaS, real-time applications, RoadE Labs",
   authors: [{ name: "AJAYRAJ A R" }],
   openGraph: {
     title: "AJAYRAJ A R — Full Stack & AI Product Developer",
     description:
-      "Full-stack & AI product developer in Kochi, India. Core engineer on Raydian (AI project-execution engine) and solo builder of Pickbid, a live cricket-auction SaaS.",
+      "Ajayraj A R — full-stack & AI product developer in Kochi, India. Core engineer at Raydian, solo builder of Pickbid. React, Next.js, Node.js, PostgreSQL.",
     type: "website",
     siteName: "Ajay Portfolio",
     locale: "en_US",
@@ -81,36 +84,43 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Ajayraj A R",
-              url: "https://portfolio-ajay-psi.vercel.app/",
-              jobTitle: "Full Stack & AI Product Developer",
-              description:
-                "Full-stack & AI product developer with 3+ years of experience. Core engineer on Raydian, an AI project-execution engine, and solo builder of Pickbid, a live cricket-auction SaaS.",
-              worksFor: {
-                "@type": "Organization",
-                name: "Raydian",
+              "@type": "ProfilePage",
+              mainEntity: {
+                "@type": "Person",
+                name: "Ajayraj A R",
+                url: "https://portfolio-ajay-psi.vercel.app/",
+                jobTitle: "Full Stack & AI Product Developer",
+                description:
+                  "Full-stack & AI product developer with 3+ years of experience. Core engineer on Raydian, an AI project-execution engine, and solo builder of Pickbid, a live cricket-auction SaaS.",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Raydian",
+                },
+                alumniOf: {
+                  "@type": "CollegeOrUniversity",
+                  name: "Mahatma Gandhi University",
+                },
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Kochi",
+                  addressRegion: "Kerala",
+                  addressCountry: "IN",
+                },
+                knowsAbout: [
+                  "Full Stack Development",
+                  "AI Product Development",
+                  "React",
+                  "Next.js",
+                  "Node.js",
+                  "PostgreSQL",
+                ],
+                image:
+                  "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
+                sameAs: [
+                  "https://github.com/Soul-Ajay4502",
+                  "https://www.linkedin.com/in/ajayraj-a-r/",
+                ],
               },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Kochi",
-                addressRegion: "Kerala",
-                addressCountry: "IN",
-              },
-              knowsAbout: [
-                "Full Stack Development",
-                "AI Product Development",
-                "React",
-                "Next.js",
-                "Node.js",
-                "PostgreSQL",
-              ],
-              image:
-                "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
-              sameAs: [
-                "https://github.com/Soul-Ajay4502",
-                "https://www.linkedin.com/in/ajayraj-a-r/",
-              ],
             }),
           }}
         />

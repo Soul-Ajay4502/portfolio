@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, GraduationCap } from "lucide-react";
 import BlurFade from "./magicui/blur-fade";
 import { MagicCard } from "./magicui/magic-card";
 import { NumberTicker } from "./magicui/number-ticker";
@@ -91,6 +91,14 @@ export default function About() {
                   </li>
                 ))}
               </ul>
+
+              {/* Education */}
+              <div className="flex items-center gap-2.5 border-t border-border pt-4">
+                <GraduationCap className="h-4 w-4 shrink-0 text-brand" />
+                <span className="text-sm text-foreground">
+                  MCA, Computer Science — Mahatma Gandhi University (2021–2023)
+                </span>
+              </div>
             </div>
           </BlurFade>
         </div>
