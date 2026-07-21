@@ -1,122 +1,137 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import type { Mesh } from "three";
+import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import { DotPattern } from "./magicui/dot-pattern";
+import { Particles } from "./magicui/particles";
+import BlurFade from "./magicui/blur-fade";
+import { AuroraText } from "./magicui/aurora-text";
+import { AnimatedShinyText } from "./magicui/animated-shiny-text";
+import { ShimmerButton } from "./magicui/shimmer-button";
+import { cn } from "@/lib/utils";
 
-function AnimatedSphere() {
-  const meshRef = useRef<Mesh>(null);
-
-  return (
-    <Sphere ref={meshRef} visible args={[1, 100, 200]} scale={2}>
-      <MeshDistortMaterial
-        color="#3b82f6"
-        attach="material"
-        distort={0.5}
-        speed={2}
-        roughness={0}
-      />
-    </Sphere>
-  );
-}
+const DELAY = 0.15;
 
 export default function Hero() {
+  const { resolvedTheme } = useTheme();
+  const [color, setColor] = useState("#ffffff");
+
+  useEffect(() => {
+    setColor(resolvedTheme === "dark" ? "#ffffff" : "#3f3f46");
+  }, [resolvedTheme]);
+
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4"
     >
-      {/* Three.js Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <AnimatedSphere />
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            autoRotate
-            autoRotateSpeed={0.5}
-          />
-        </Canvas>
-      </div>
+      {/* Background layers */}
+      <DotPattern
+        width={22}
+        height={22}
+        cx={1}
+        cy={1}
+        cr={1}
+        className={cn(
+          "[mask-image:radial-gradient(560px_circle_at_center,white,transparent)]",
+        )}
+      />
+      <Particles
+        className="absolute inset-0"
+        quantity={90}
+        ease={80}
+        color={color}
+        refresh
+      />
+      {/* Soft brand glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/10 blur-[120px]" />
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold mb-6"
-        >
-          AJAYRAJ A R
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-blue-400 mb-8"
-        >
-          Full Stack Developer
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
-        >
-          Passionate developer with 2+ years of experience building modern web
-          applications using React, Next.js, and cutting-edge technologies.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <BlurFade delay={DELAY} inView>
           <button
-            onClick={() =>
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors"
+            onClick={() => scrollTo("projects")}
+            className="group mx-auto mb-6 inline-flex items-center rounded-full border border-border bg-muted/40 px-1 py-1 backdrop-blur-sm transition-colors hover:bg-muted"
           >
-            View My Work
+            <span className="flex items-center gap-1.5 rounded-full bg-background px-3 py-1 text-xs font-medium text-foreground shadow-sm">
+              <Sparkles className="h-3 w-3 text-brand" />
+              Open to opportunities
+            </span>
+            <AnimatedShinyText className="inline-flex items-center px-3 text-xs">
+              See my work
+              <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+            </AnimatedShinyText>
           </button>
-          <button
-            onClick={() =>
-              document
-                .getElementById("contact")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="px-8 py-3 border border-blue-600 hover:bg-blue-600 rounded-lg font-medium transition-colors"
-          >
-            Get In Touch
-          </button>
-        </motion.div>
+        </BlurFade>
+
+        <BlurFade delay={DELAY * 2} inView>
+          <h1 className="text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
+            <AuroraText>AJAYRAJ A R</AuroraText>
+          </h1>
+        </BlurFade>
+
+        <BlurFade delay={DELAY * 3} inView>
+          <p className="mx-auto mt-4 text-lg font-medium text-muted-foreground sm:text-xl">
+            Full-Stack &amp; AI Product Developer
+          </p>
+        </BlurFade>
+
+        <BlurFade delay={DELAY * 4} inView>
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
+            I build AI-powered products end to end — from{" "}
+            <span className="font-medium text-foreground">Raydian</span>, an AI
+            project-execution engine, to{" "}
+            <span className="font-medium text-foreground">Pickbid</span>, a live
+            cricket-auction platform I designed and shipped solo. Full-stack
+            engineer, 3+ years.
+          </p>
+        </BlurFade>
+
+        <BlurFade delay={DELAY * 5} inView>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <ShimmerButton
+              onClick={() => scrollTo("projects")}
+              shimmerColor="hsl(var(--brand-soft))"
+              className="w-full shadow-lg sm:w-auto"
+            >
+              <span className="flex items-center gap-2 text-sm font-semibold">
+                View My Work
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </ShimmerButton>
+            <button
+              onClick={() => scrollTo("contact")}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background/50 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:bg-accent sm:w-auto"
+            >
+              Get In Touch
+              <ArrowUpRight className="h-4 w-4" />
+            </button>
+          </div>
+        </BlurFade>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
+        onClick={() => scrollTo("about")}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        transition={{ delay: 1.4 }}
+        aria-label="Scroll down"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+        <div className="flex h-9 w-5 items-start justify-center rounded-full border border-border p-1">
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-            className="w-1 h-3 bg-white rounded-full mt-2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.6, repeat: Number.POSITIVE_INFINITY }}
+            className="h-2 w-1 rounded-full bg-muted-foreground"
           />
         </div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 }

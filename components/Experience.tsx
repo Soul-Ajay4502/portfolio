@@ -1,75 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { MapPin, Briefcase } from "lucide-react";
 import { experienceData } from "@/lib/data";
+import BlurFade from "./magicui/blur-fade";
+import { MagicCard } from "./magicui/magic-card";
+import SectionHeading from "./section-heading";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-        </motion.div>
+    <section id="experience" className="section-padding bg-muted/30">
+      <div className="container-max max-w-3xl">
+        <SectionHeading
+          eyebrow="Career"
+          title="Work Experience"
+          description="Roles where I've shipped real products and grown as an engineer."
+        />
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-0.5 h-full bg-blue-600"></div>
+          <div className="absolute bottom-0 left-[15px] top-2 w-px bg-border md:left-[19px]" />
 
-          {experienceData.map((experience, index) => (
-            <motion.div
-              key={experience.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className={`relative flex items-center mb-12 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-gray-900 z-10"></div>
-
-              {/* Content */}
-              <div
-                className={`ml-12 md:ml-0 md:w-5/12 ${index % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}
-                title={experience.location || "Kochi,Kerala,India"}
-              >
-                <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-blue-600 transition-colors">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <h3 className="text-xl font-bold text-white">
-                      {experience.position}
-                    </h3>
-                    <span className="text-blue-400 font-medium">
-                      {experience.duration}
+          <div className="space-y-6">
+            {experienceData.map((experience, index) => (
+              <BlurFade key={experience.id} delay={index * 0.1} inView>
+                <div className="relative flex gap-5 md:gap-6">
+                  {/* Node */}
+                  <div className="relative z-10 flex-shrink-0">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background md:h-10 md:w-10">
+                      <span className="flex h-2.5 w-2.5 items-center justify-center rounded-full bg-brand">
+                        {index === 0 && (
+                          <span className="absolute inline-flex h-2.5 w-2.5 animate-ping rounded-full bg-brand opacity-75" />
+                        )}
+                      </span>
                     </span>
                   </div>
 
-                  <h4 className="text-lg text-blue-400 mb-3">
-                    {experience.company}
-                  </h4>
-                  <p className="text-gray-300 mb-4">{experience.description}</p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {experience.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-gray-700 text-blue-400 text-sm rounded-full"
-                      >
-                        {tech}
+                  {/* Card */}
+                  <MagicCard className="mb-2 flex-1 p-5 sm:p-6">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="text-lg font-semibold text-foreground">
+                        {experience.position}
+                      </h3>
+                      <span className="inline-flex w-fit items-center rounded-full border border-border bg-muted/50 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+                        {experience.duration}
                       </span>
-                    ))}
-                  </div>
+                    </div>
+
+                    <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+                      <span className="inline-flex items-center gap-1.5 font-medium text-brand">
+                        <Briefcase className="h-3.5 w-3.5" />
+                        {experience.company}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                        <MapPin className="h-3.5 w-3.5" />
+                        {experience.location || "Kochi, Kerala, India"}
+                      </span>
+                    </div>
+
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {experience.description}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {experience.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </MagicCard>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </BlurFade>
+            ))}
+          </div>
         </div>
       </div>
     </section>

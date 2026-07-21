@@ -1,177 +1,197 @@
 "use client";
 
-import type React from "react";
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Send, Loader2 } from "lucide-react";
 import { useForm } from "@formspree/react";
+import BlurFade from "./magicui/blur-fade";
+import { MagicCard } from "./magicui/magic-card";
+import SectionHeading from "./section-heading";
 import Toast from "./toas-by-me";
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "rajay5767@gmail.com",
+    href: "mailto:rajay5767@gmail.com",
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "+91 9846027693",
+    href: "tel:+919846027693",
+  },
+  {
+    icon: MapPin,
+    label: "Location",
+    value: "Kochi, Kerala, India",
+    href: null,
+  },
+];
+
+const socials = [
+  { icon: Github, href: "https://github.com/Soul-Ajay4502", label: "GitHub" },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/ajayraj-a-r/",
+    label: "LinkedIn",
+  },
+];
+
+const inputClasses =
+  "w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";
 
 export default function Contact() {
   const [formState, handleSubmit] = useForm("mpwdvowg");
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, interesting
-            projects, or just having a chat about technology.
-          </p>
-        </motion.div>
+    <section id="contact" className="section-padding">
+      <div className="container-max max-w-5xl">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Let's build something"
+          description="I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
           {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-2xl font-bold text-white mb-8">
-              Contact Information
-            </h3>
-            <div className="space-y-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
-                  <Mail size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Email</p>
-                  <p className="text-white">rajay5767@gmail.com</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
-                  <Phone size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Phone</p>
-                  <p className="text-white">+91 9846027693</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
-                  <MapPin size={20} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-gray-400">Location</p>
-                  <p className="text-white">Kochi, Kerala, India</p>
-                </div>
-              </div>
-            </div>
+          <BlurFade delay={0.1} inView className="lg:col-span-2">
+            <div className="flex h-full flex-col gap-4">
+              {contactInfo.map((info) => {
+                const Icon = info.icon;
+                const content = (
+                  <MagicCard className="flex items-center gap-4 p-4 transition-colors hover:border-brand/40">
+                    <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-border bg-muted text-brand">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs text-muted-foreground">
+                        {info.label}
+                      </p>
+                      <p className="truncate text-sm font-medium text-foreground">
+                        {info.value}
+                      </p>
+                    </div>
+                  </MagicCard>
+                );
+                return info.href ? (
+                  <a key={info.label} href={info.href} className="block">
+                    {content}
+                  </a>
+                ) : (
+                  <div key={info.label}>{content}</div>
+                );
+              })}
 
-            {/* Social Links */}
-            <div className="mt-8">
-              <h4 className="text-lg font-semibold text-white mb-4">
-                Follow Me
-              </h4>
-              <div className="flex space-x-4">
-                <a
-                  href="https://github.com/Soul-Ajay4502"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
-                >
-                  <Github size={20} className="text-white" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/ajayraj-a-r/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
-                >
-                  <Linkedin size={20} className="text-white" />
-                </a>
+              <div className="mt-auto pt-2">
+                <p className="mb-3 text-sm font-medium text-foreground">
+                  Follow me
+                </p>
+                <div className="flex gap-3">
+                  {socials.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label}
+                        className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors hover:border-brand/40 hover:bg-accent hover:text-brand"
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </motion.div>
+          </BlurFade>
 
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Honeypot field (hidden from users, visible to bots) */}
-              <input
-                type="text"
-                name="_gotcha"
-                className="hidden"
-                autoComplete="off"
-                aria-hidden="true"
-              />
-
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
-                  Name
-                </label>
+          <BlurFade delay={0.2} inView className="lg:col-span-3">
+            <MagicCard className="p-6 sm:p-8">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-600 transition-colors"
-                  placeholder="Your Name"
+                  name="_gotcha"
+                  className="hidden"
+                  autoComplete="off"
+                  aria-hidden="true"
+                  tabIndex={-1}
                 />
-              </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-300 mb-2"
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-2 block text-sm font-medium text-foreground"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className={inputClasses}
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-sm font-medium text-foreground"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className={inputClasses}
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    className={`${inputClasses} resize-none`}
+                    placeholder="Tell me about your project or opportunity..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={formState.submitting}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                 >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-600 transition-colors"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-600 transition-colors resize-none"
-                  placeholder="Your message..."
-                />
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="w-full px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-              >
-                Send Message
-              </motion.button>
-            </form>
-          </motion.div>
+                  {formState.submitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </form>
+            </MagicCard>
+          </BlurFade>
         </div>
       </div>
 

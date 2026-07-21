@@ -36,6 +36,25 @@ export const skillsData = [
 // Projects Data
 export const projectsData = [
   {
+    id: 10,
+    title: "Pickbid",
+    description:
+      "A full-stack SaaS platform for running local cricket leagues end to end — design broadcast-quality player cards, host real-time auctions spectators follow live from any browser, track auto-updating leaderboards, record matches, and export or share squads via PDF and WhatsApp. Designed and built solo.",
+    image: "https://player-card-generator.vercel.app/opengraph-image",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "NextAuth",
+      "Cloudinary",
+      "Tailwind CSS",
+    ],
+    github: "",
+    demo: "https://player-card-generator.vercel.app",
+    showDemo: true,
+    showCode: false,
+  },
+  {
     id: 1,
     title: "The Auctioneer",
     description:
@@ -163,12 +182,29 @@ export const projectsData = [
 // Experience Data
 export const experienceData = [
   {
+    id: 4,
+    position: "Software Engineer",
+    company: "Raydian",
+    duration: "Sep 2025 - Present",
+    description:
+      "Core engineer on Raydian, an AI-powered project execution engine. Contributed to Raydian's product architecture across Next.js, Node.js, and PostgreSQL, and helped grow the product from concept to public launch through parallel product and content work.",
+    technologies: [
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+    ],
+    location: "Kochi,Kerala,India",
+  },
+  {
     id: 1,
     position: "Software Engineer",
     company: "Beurokrat",
-    duration: "Apr 2025 - Present",
+    duration: "Apr 2025 - Sep 2025",
     description:
-      "Developed and maintained multiple web applications using  Next.js, and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions. Implemented responsive designs and optimized application performance.",
+      "Built and shipped web application features across the stack with Next.js, Node.js, and PostgreSQL — from Sequelize schema design to responsive shadcn/ui interfaces — with a focus on performance and data integrity.",
     technologies: [
       "Next.js",
       "Node.js",

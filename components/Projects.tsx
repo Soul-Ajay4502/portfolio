@@ -1,140 +1,219 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
+import { ExternalLink, Github, Play, ArrowUpRight } from "lucide-react";
 import { projectsData } from "@/lib/data";
+import BlurFade from "./magicui/blur-fade";
+import { MagicCard } from "./magicui/magic-card";
+import { BorderBeam } from "./magicui/border-beam";
+import SectionHeading from "./section-heading";
+import { cn } from "@/lib/utils";
+
+type Project = (typeof projectsData)[number];
+
+const isVideo = (url: string) => url.toLowerCase().endsWith(".mp4");
+
+function TechBadge({ tech }: { tech: string }) {
+  return (
+    <span className="rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+      {tech}
+    </span>
+  );
+}
+
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <div className="flex items-center gap-2">
+      {project.showCode && project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} source code`}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:bg-accent"
+        >
+          <Github className="h-4 w-4" />
+        </a>
+      )}
+      {project.showDemo && project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          {isVideo(project.demo) ? (
+            <>
+              <Play className="h-3.5 w-3.5" />
+              Watch Demo
+            </>
+          ) : (
+            <>
+              <ExternalLink className="h-3.5 w-3.5" />
+              Live Demo
+            </>
+          )}
+        </a>
+      )}
+    </div>
+  );
+}
+
+function FeaturedProject({ project }: { project: Project }) {
+  return (
+    <MagicCard className="overflow-hidden">
+      <BorderBeam size={260} duration={14} />
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="group relative aspect-video overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[340px]">
+          <Image
+            src={project.image || "/placeholder.svg"}
+            alt={project.title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent lg:bg-gradient-to-r" />
+        </div>
+        <div className="flex flex-col justify-center gap-4 p-7 sm:p-9">
+          <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-medium text-brand">
+            ★ Featured Project
+          </span>
+          <h3 className="text-2xl font-bold tracking-tight text-foreground">
+            {project.title}
+          </h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {project.technologies.map((tech) => (
+              <TechBadge key={tech} tech={tech} />
+            ))}
+          </div>
+          <div className="pt-2">
+            <ProjectLinks project={project} />
+          </div>
+        </div>
+      </div>
+    </MagicCard>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <MagicCard className="flex h-full flex-col overflow-hidden">
+      <div className="group relative h-44 overflow-hidden">
+        <Image
+          src={project.image || "/placeholder.svg"}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-2 flex items-start justify-between gap-2">
+          <h3 className="text-base font-semibold text-foreground">
+            {project.title}
+          </h3>
+          {project.showDemo && project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.title}`}
+              className="text-muted-foreground transition-colors hover:text-brand"
+            >
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          )}
+        </div>
+        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
+
+        <div className="mb-4 mt-auto flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 4).map((tech) => (
+            <TechBadge key={tech} tech={tech} />
+          ))}
+          {project.technologies.length > 4 && (
+            <span className="px-1 py-0.5 text-xs text-muted-foreground">
+              +{project.technologies.length - 4}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-4 border-t border-border pt-4 text-sm">
+          {project.showCode && project.github ? (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Github className="h-4 w-4" />
+              Code
+            </a>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-muted-foreground/40">
+              <Github className="h-4 w-4" />
+              Private
+            </span>
+          )}
+          {project.showDemo && project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium text-brand transition-colors hover:text-brand-soft"
+            >
+              {isVideo(project.demo) ? (
+                <>
+                  <Play className="h-3.5 w-3.5" />
+                  Demo
+                </>
+              ) : (
+                <>
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  Live
+                </>
+              )}
+            </a>
+          )}
+        </div>
+      </div>
+    </MagicCard>
+  );
+}
 
 export default function Projects() {
+  const [featured, ...rest] = projectsData;
+
   return (
-    <section id="projects" className="py-20 bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    <section id="projects" className="section-padding">
+      <div className="container-max">
+        <SectionHeading
+          eyebrow="Work"
+          title="Featured Projects"
+          description="A selection of products and experiments — from production SaaS to focused builds."
+        />
+
+        <BlurFade inView>
+          <div className="mb-6">
+            <FeaturedProject project={featured} />
+          </div>
+        </BlurFade>
+
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
+          )}
         >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-900 pb-4 relative rounded-lg overflow-hidden border border-gray-700 hover:border-blue-600 transition-all duration-300 group"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="flex space-x-4">
-                    {project.showCode ? (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
-                      >
-                        <Github size={20} className="text-white" />
-                      </a>
-                    ) : (
-                      <button
-                        disabled
-                        className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors"
-                      >
-                        <Github size={20} className="text-white" />
-                      </button>
-                    )}
-                    {project.showDemo ? (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
-                      >
-                        <ExternalLink size={20} className="text-white" />
-                      </a>
-                    ) : (
-                      <button
-                        disabled
-                        className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
-                      >
-                        <ExternalLink size={20} className="text-white" />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-gray-700 text-blue-400 text-sm rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="flex space-x-4 absolute bottom-5 right-4">
-                {project.showCode ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
-                  >
-                    <Github size={20} className="text-white" />
-                  </a>
-                ) : (
-                  <button
-                    disabled
-                    className="flex items-center text-gray-300 hover:text-white transition-colors"
-                  >
-                    <Github size={20} className="text-white" />
-                  </button>
-                )}
-                {project.showDemo ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink size={16} className="mr-2" />
-                    Live Demo
-                  </a>
-                ) : (
-                  <button
-                    disabled
-                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink size={16} className="mr-2" />
-                    Live Demo
-                  </button>
-                )}
-              </div>
-            </motion.div>
+          {rest.map((project, index) => (
+            <BlurFade key={project.id} delay={0.05 * index} inView>
+              <ProjectCard project={project} />
+            </BlurFade>
           ))}
         </div>
       </div>

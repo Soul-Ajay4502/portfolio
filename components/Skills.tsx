@@ -1,81 +1,117 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Palette, Server, Database } from "lucide-react";
 import { skillsData } from "@/lib/data";
-import SkillTabs from "./skill-tabs";
+import Marquee from "./magicui/marquee";
+import BlurFade from "./magicui/blur-fade";
+import { MagicCard } from "./magicui/magic-card";
+import SectionHeading from "./section-heading";
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  Frontend: <Palette className="h-5 w-5" />,
+  Backend: <Server className="h-5 w-5" />,
+  Database: <Database className="h-5 w-5" />,
+};
+
+const marqueeTech = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "Express",
+  "PostgreSQL",
+  "Supabase",
+  "MongoDB",
+  "MySQL",
+  "Tailwind CSS",
+  "React Native",
+  "Firebase",
+  "Redux",
+  "Framer Motion",
+  "Docker",
+  "Git",
+  "Figma",
+  "AWS",
+];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Skills & Technologies
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-        </motion.div>
+    <section id="skills" className="section-padding bg-muted/30">
+      <div className="container-max">
+        <SectionHeading
+          eyebrow="Skills"
+          title="Skills & Technologies"
+          description="The tools I reach for to take products from idea to production."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Tech marquee */}
+        <BlurFade inView>
+          <div className="relative mb-12 overflow-hidden">
+            <Marquee pauseOnHover className="[--duration:35s]">
+              {marqueeTech.map((tech) => (
+                <div
+                  key={tech}
+                  className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-foreground"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand/70" />
+                  {tech}
+                </div>
+              ))}
+            </Marquee>
+            {/* edge fades */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-muted/30 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-muted/30 to-transparent" />
+          </div>
+        </BlurFade>
+
+        {/* Proficiency cards */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {skillsData.map((category, index) => (
-            <motion.div
-              key={category.category}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-blue-600 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                <span className="text-2xl mr-3">{category.icon}</span>
-                {category.category}
-              </h3>
+            <BlurFade key={category.category} delay={index * 0.1} inView>
+              <MagicCard className="h-full p-6">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted text-brand">
+                    {categoryIcons[category.category] ?? (
+                      <span className="text-lg">{category.icon}</span>
+                    )}
+                  </span>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {category.category}
+                  </h3>
+                </div>
 
-              <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="text-gray-300">{skill.name}</span>
-                    <div className="flex items-center">
-                      <div className="w-24 bg-gray-700 rounded-full h-2 mr-3">
+                <div className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skill.name}>
+                      <div className="mb-1.5 flex items-center justify-between">
+                        <span className="text-sm text-foreground">
+                          {skill.name}
+                        </span>
+                        <span className="text-xs font-medium text-muted-foreground">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                          transition={{
+                            duration: 1,
+                            delay: skillIndex * 0.08,
+                            ease: "easeOut",
+                          }}
                           viewport={{ once: true }}
-                          className="bg-blue-600 h-2 rounded-full"
+                          className="h-full rounded-full bg-gradient-to-r from-brand to-brand-soft"
                         />
                       </div>
-                      <span className="text-blue-400 text-sm font-medium">
-                        {skill.level}%
-                      </span>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                  ))}
+                </div>
+              </MagicCard>
+            </BlurFade>
           ))}
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <SkillTabs />
-        </motion.div>
       </div>
     </section>
   );
