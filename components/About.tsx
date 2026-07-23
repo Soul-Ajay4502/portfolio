@@ -7,6 +7,7 @@ import { MagicCard } from "./magicui/magic-card";
 import { NumberTicker } from "./magicui/number-ticker";
 import { BorderBeam } from "./magicui/border-beam";
 import SectionHeading from "./section-heading";
+import { PROFILE_IMAGE_URL } from "@/lib/constants";
 
 const stats = [
   { value: 3, suffix: "+", label: "Years Experience" },
@@ -35,7 +36,7 @@ export default function About() {
             <div className="relative mx-auto aspect-square w-full max-w-sm">
               <div className="relative h-full w-full overflow-hidden rounded-3xl border border-border">
                 <Image
-                  src="https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg"
+                  src={PROFILE_IMAGE_URL}
                   alt="AJAYRAJ A R"
                   fill
                   sizes="(max-width: 768px) 100vw, 400px"

@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { GA_TRACKING_ID } from "@/lib/gtag"; // or wherever you saved it
+import { PROFILE_IMAGE_URL } from "@/lib/constants";
 import Script from "next/script";
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-ajay-psi.vercel.app"),
-  title: "AJAYRAJ A R — Full Stack & AI Product Developer | Kochi, India",
+  title: "AJAYRAJ A R — Full Stack & AI Product Developer",
   description:
     "Ajayraj A R — full-stack & AI product developer in Kochi, India. Core engineer at Raydian, solo builder of Pickbid. React, Next.js, Node.js, PostgreSQL.",
   alternates: {
@@ -32,14 +33,14 @@ export const metadata: Metadata = {
     siteName: "Ajay Portfolio",
     locale: "en_US",
     url: "https://portfolio-ajay-psi.vercel.app/",
-    images: [
-      {
-        url: "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Ajayraj A R's Portfolio - Full Stack & AI Product Developer (React, Next.js, Node.js)",
-      },
-    ],
+    // og:image is generated dynamically by app/opengraph-image.tsx
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AJAYRAJ A R — Full Stack & AI Product Developer",
+    description:
+      "Ajayraj A R — full-stack & AI product developer in Kochi, India. Core engineer at Raydian, solo builder of Pickbid. React, Next.js, Node.js, PostgreSQL.",
+    // twitter:image is generated dynamically by app/twitter-image.tsx
   },
   generator: "Ajayraj A R",
 };
@@ -114,8 +115,7 @@ export default function RootLayout({
                   "Node.js",
                   "PostgreSQL",
                 ],
-                image:
-                  "https://res.cloudinary.com/dqx2hecxm/image/upload/v1748451213/AJAY_symnbh.jpg",
+                image: PROFILE_IMAGE_URL,
                 sameAs: [
                   "https://github.com/Soul-Ajay4502",
                   "https://www.linkedin.com/in/ajayraj-a-r/",
